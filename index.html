@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>iOS-Stil Seite mit Video-Navigation</title>
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    text-align: center;
+    background: transparent; /* Hintergrund transparent */
+    margin: 0;
+    padding: 20px;
+  }
+
+  header {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #000;
+  }
+
+  .video-container {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+    margin-top: 20px;
+  }
+
+  .video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Video-Navigation</h1>
+</header>
+
+<div class="video-container">
+  <iframe id="videoFrame" src="https://www.youtube.com/embed/GCiBCXs85JQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+<script>
+  var videos = [
+    "8SApwyWKKp0",
+    "OiO1Z05IGOU",
+    "uwmDH12MAA4",
+    // Fügen Sie hier weitere Video-IDs hinzu
+  ];
+  var currentVideoIndex = 0;
+
+  function changeVideo(index) {
+    var newVideoId = videos[index];
+    document.getElementById('videoFrame').src = 'https://www.youtube.com/embed/' + newVideoId;
+  }
+
+  document.onkeydown = function(e) {
+    if (e.key === 'a') { // 'A' key
+      currentVideoIndex--;
+      if (currentVideoIndex < 0) {
+        currentVideoIndex = videos.length - 1;
+      }
+      changeVideo(currentVideoIndex);
+    } else if (e.key === 's') { // 'S' key
+      currentVideoIndex++;
+      if (currentVideoIndex > videos.length - 1) {
+        currentVideoIndex = 0;
+      }
+      changeVideo(currentVideoIndex);
+    }
+  };
+</script>
+
+</body>
+</html>
